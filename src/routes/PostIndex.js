@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 // import { Link } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
+// import Button from 'react-bootstrap/Button'
 // import Card from 'react-bootstrap/Card'
 //  impoort out axios request to get all post
 import { postIndex } from '../api/post'
@@ -19,8 +20,9 @@ class PostIndex extends Component {
 
     // fetch all of our posts
     postIndex(user)
-      .then( res => {console.log('this is res data', res.data)
-      return res
+      .then(res => {
+        console.log('this is res data', res.data)
+        return res
       })
       .then(res => this.setState({ posts: res.data }))
       .then(() => msgAlert({
@@ -53,6 +55,7 @@ class PostIndex extends Component {
             <h4>{post.restaurant}</h4>
             <p>{post.zipcode}</p>
             <p>{post.body}</p>
+
           </div>
           // <Link to={`/posts/${post._id}`} key={post._id}>
           //   <Card bg='secondary' className="cardStyle" key={post.id} style={{ width: '18rem' }}>

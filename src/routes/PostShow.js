@@ -1,7 +1,7 @@
 // 1. Imports
 // Component & Fragment
 import React, { Component, Fragment } from 'react'
-import { Redirect, withRouter } from 'react-router-dom'
+import { Link, Redirect, withRouter } from 'react-router-dom'
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
 import { postShow, postDelete } from '../api/post'
@@ -31,16 +31,16 @@ class PostShow extends Component {
     console.log(this.props)
     postShow(user, match.params.id)
     //  set the createdMovieId to the _id of the movie we got in the response data
-      .then(res => this.setState({ post: res.data.post }))
+      .then(res => this.setState({ post: res.data._id }))
 
       .then(() => msgAlert({
-        heading: 'Showing Movie Successfully',
-        message: 'Showing Created Movie.',
+        heading: 'Showing Post Successfully',
+        message: 'Showing Created Post.',
         variant: 'success'
       }))
       .catch(error => {
         msgAlert({
-          heading: 'Failed Showing Movie',
+          heading: 'Failed Showing Post',
           message: 'Could not create movie with error:' + error.messge,
           variant: 'danger'
         })
@@ -93,9 +93,9 @@ class PostShow extends Component {
           <h4>{post.zipcode}</h4>
           <p>{post.body}</p>
           <button onClick={this.deletePost}>Delete Me</button>
-          {/*  // <button>
-          //   <Link to={'/update-book/' + this.props.match.params.id}>Update Me</Link>
-          // </button> */}
+          <button>
+            <Link to={'/update-post/' + this.props.match.params.id}>Update Me</Link>
+          </button>
         </div>
       )
     }
