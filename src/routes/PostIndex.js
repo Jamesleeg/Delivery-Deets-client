@@ -19,7 +19,10 @@ class PostIndex extends Component {
 
     // fetch all of our posts
     postIndex(user)
-      .then(res => this.setState({ posts: res.data.posts }))
+      .then( res => {console.log('this is res data', res.data)
+      return res
+      })
+      .then(res => this.setState({ posts: res.data }))
       .then(() => msgAlert({
         heading: 'Loaded Post Successfully',
         message: 'Viewing all Posts. Click on one to see its page',
