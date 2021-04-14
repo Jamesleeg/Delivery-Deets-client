@@ -9,7 +9,9 @@ import SignUp from './components/SignUp/SignUp'
 import SignIn from './components/SignIn/SignIn'
 import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
-
+import PostCreate from './routes/PostCreate'
+import PostIndex from './routes/PostIndex'
+import PostShow from './routes/PostShow'
 class App extends Component {
   constructor (props) {
     super(props)
@@ -64,6 +66,16 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
+          )} />
+          {/* Create a movie */}
+          <AuthenticatedRoute user={user} path='/post-create' render={() => (
+            <PostCreate msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/post-index' render={() => (
+            <PostIndex msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/post-show/:id' render={() => (
+            <PostShow msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
       </Fragment>

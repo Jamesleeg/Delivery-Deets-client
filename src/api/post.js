@@ -1,7 +1,7 @@
 import axios from 'axios'
 import apiUrl from '../apiConfig'
 
-export const postCreate = (user, data) => {
+export const postCreate = (data, user) => {
   return axios({
     url: apiUrl + '/post',
     method: 'POST',
@@ -59,7 +59,7 @@ export const postUpdate = (id, post, user) => {
     headers: {
       'Authorization': `Bearer ${user.token}`
     },
-    data: { picture }
+    data: { post }
   })
 }
 
