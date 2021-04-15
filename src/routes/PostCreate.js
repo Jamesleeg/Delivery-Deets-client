@@ -52,7 +52,7 @@ class PostCreate extends Component {
   render () {
     const { post, createdPostId } = this.state
     if (createdPostId) {
-      return <Redirect to={`/post/${createdPostId}`} />
+      return <Redirect to={`/post-show/${createdPostId}`} />
     }
     return (
       <div className="row">
