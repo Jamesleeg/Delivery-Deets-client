@@ -81,7 +81,7 @@ class PostIndex extends Component {
     return (
       <div className="row">
         <div className="col-sm-10 col-md-8 mx-auto mt-5">
-          <h3>DEETS BOARD</h3>
+          <h3>post board</h3>
           <ul>
             {postsJSX}
           </ul>

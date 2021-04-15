@@ -34,7 +34,8 @@ class PostShow extends Component {
     console.log(this.props)
     postShow(match.params.id)
     //  set the createdPostId to the _id of the movie we got in the response data
-      .then(res => this.setState({ post: res.data._id }))
+      .then(res => console.log('this is res', res))
+      .then(res => this.setState({ post: res.data }))
 
       .then(() => msgAlert({
         heading: 'Showing Post Successfully',
