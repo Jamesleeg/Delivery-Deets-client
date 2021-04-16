@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button'
 // import { withRouter } from 'react-router-dom'
 // import Card from 'react-bootstrap/Card'
 //  impoort out axios request to get all post
-// import moment from 'moment'
+import moment from 'moment'
 import { postIndex, postDelete, postUpdate } from '../api/post'
 class PostIndex extends Component {
   constructor (props) {
@@ -108,9 +108,9 @@ class PostIndex extends Component {
       if (post !== 'private') {
         return (
           <div>
-            <h4>{post.restaurant}</h4>
-            <p>{post.zipcode}</p>
-            <p>{post.body}</p>
+            <h5>Restaurant: {post.restaurant}</h5>
+            <h5>Zipcode: {post.zipcode}</h5>
+            <h5>Created: {moment(post.createdAt).format('dddd, MMMM Do YYYY, h:mm:ss a')}</h5>
             <Button variant="outline-primary">
               <Link to={`/post-show/${post._id}`} key={post._id}>See Deets!</Link>
 
