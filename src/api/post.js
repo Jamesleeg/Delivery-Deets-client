@@ -33,13 +33,13 @@ export const galleryNoUser = () => {
   })
 }
 
-export const postShow = (id) => {
+export const postShow = (user, id) => {
   return axios({
     url: apiUrl + '/post/' + id,
-    method: 'Get'
-    // headers: {
-    //   'Authorization': `Bearer ${user.token}`
-    // }
+    method: 'Get',
+    headers: {
+      'Authorization': `Bearer ${user.token}`
+    }
   })
 }
 

@@ -13,6 +13,7 @@ import PostCreate from './routes/PostCreate'
 import PostIndex from './routes/PostIndex'
 import PostShow from './routes/PostShow'
 import UserPost from './components/Home/UserPost'
+import Gallery from './components/Home/Gallery'
 class App extends Component {
   constructor (props) {
     super(props)
@@ -62,6 +63,10 @@ class App extends Component {
           <Route path='/sign-in' render={() => (
             <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
+          <Route path='/gallery' render={() => (
+            <Gallery msgAlert={this.msgAlert} />
+          )} />
+
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
           )} />

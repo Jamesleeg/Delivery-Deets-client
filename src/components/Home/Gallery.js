@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Spinner from 'react-bootstrap/Spinner'
 import Card from 'react-bootstrap/Card'
 //  impoort out axios request to get all mocies
-import { galleryNoUser } from '../../api/Pictures'
+import { galleryNoUser } from '../../api/post'
 class Gallery extends Component {
   constructor (props) {
     super(props)
@@ -18,35 +18,36 @@ class Gallery extends Component {
 
     // fetch all of our movies
     galleryNoUser()
-      .then(res => this.setState({ pictures: res.data.pictures }))
+      .then(res => this.setState({ posts: res.data.posts }))
       .then(() => msgAlert({
-        heading: 'Welcome to SnapShot!',
-        message: 'Viewing all Public Pictures. Sign in to add more!',
+        heading: 'Welcome to DeliveryDeets!',
+        message: 'Viewing all Public DEETS. Sign in to add more!',
         variant: 'success'
       }))
       .catch(error => {
         msgAlert({
-          heading: 'Failed Loading Pictures ',
-          message: 'Could not load pictures with error' + error.message,
+          heading: 'Failed Loading Post',
+          message: 'Could not load post with error' + error.message,
           variant: 'danger'
         })
       })
   }
   render () {
-    const { pictures } = this.state
-    if (!pictures) {
+    const { posts } = this.state
+    if (!posts) {
       return (
         <Spinner animation="grow" varient='primary'/>
       )
     }
 
-    const picturesJSX = pictures.map(picture => {
-      if (picture !== 'private') {
+    const postsJSX = posts.map(post => {
+      if (post !== 'private') {
         return (
-          <div key={picture._id}>
-            <Card bg='secondary' className="cardStyle" key={picture.id} style={{ width: '18rem' }}>
-              <Card.Img varient='top' className='img' src={picture.url} style={{ height: 200 }}/>
+          <div key={post._id}>
+            <Card bg='secondary' className="cardStyle" key={post.id} style={{ width: '18rem' }}>
+
               <Card.Body className="card-body">
+                <h3> {post.restaurant}</h3>
               </Card.Body>
             </Card>
           </div>
@@ -67,7 +68,7 @@ class Gallery extends Component {
           <h5>Sign in or Sign up to add Pictures</h5>
         </div>
         <div style={cardContanierLayout}>
-          { picturesJSX }
+          { postsJSX }
         </div>
       </div>
     )

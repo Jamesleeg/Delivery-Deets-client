@@ -3,6 +3,7 @@
 import React, { Component, Fragment } from 'react'
 import { Redirect, withRouter } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
 import { postShow, postDelete, postUpdate } from '../api/post'
@@ -29,13 +30,12 @@ class PostShow extends Component {
   // request using the ID param in the front-end route URL
   // and set the state to trigger a re-render
   componentDidMount () {
-    const { msgAlert, match } = this.props
+    const { msgAlert, user, match } = this.props
 
-    console.log(this.props)
-    postShow(match.params.id)
+    postShow(user, match.params.id)
     //  set the createdPostId to the _id of the movie we got in the response data
-      .then(res => console.log('this is res', res))
-      .then(res => this.setState({ post: res.data }))
+      // .then(res => console.log('this is res', res.data.post))
+      .then(res => this.setState({ post: res.data.post }))
 
       .then(() => msgAlert({
         heading: 'Showing Post Successfully',
@@ -45,7 +45,7 @@ class PostShow extends Component {
       .catch(error => {
         msgAlert({
           heading: 'Failed Showing Post',
-          message: 'Could not create movie with error:' + error.messge,
+          message: 'Could not show post with error:' + error.messge,
           variant: 'danger'
         })
       })
@@ -80,8 +80,8 @@ class PostShow extends Component {
     postUpdate(match.params.id, this.state.post, user)
       .then(res => this.setState({ updated: true }))
       .then(() => msgAlert({
-        heading: 'Updated Picture Successfully',
-        message: 'Nice! You updated your Image!.',
+        heading: 'Updated Post Successfully',
+        message: 'Nice! You updated your Post!.',
         variant: 'success'
       }))
       .catch(error => {
@@ -91,6 +91,14 @@ class PostShow extends Component {
           variant: 'danger'
         })
       })
+  }
+  handleChange = event => {
+    event.persist()
+    this.setState(state => {
+      return {
+        post: { ...state.post, [event.target.name]: event.target.value }
+      }
+    })
   }
 
   render () {
@@ -108,7 +116,7 @@ class PostShow extends Component {
       // loading, no book yet
       postJsx = <p>Loading...</p>
     } else if (updated) {
-      return <Redirect to="/post/"/>
+      return <Redirect to="/post-index"/>
     } else {
       // we have a book! Display it
       postJsx = (
@@ -121,18 +129,41 @@ class PostShow extends Component {
             <h5>Deets: {post.body}</h5>
             <h5>Created: {moment(post.createdAt).format('dddd, MMMM Do YYYY, h:mm:ss a')}</h5>
             <br />
-            {post.owner === this.props.user._id && <Button variant='primary' onClick={this.deletePicture}>Delete Me</Button>}
+            {post.owner === this.props.user._id && <Button variant='primary' onClick={this.deletePost}>Delete Me</Button>}
             <br />
             <br />
-            {post.owner === this.props.user._id && <form className="updateForm" onSubmit={this.updatePost}>
+            {post.owner === this.props.user._id && <Form className="updateForm" onSubmit={this.updatePost}>
               <input type="text" name="restaurant" placeholder='New Restaurant Here' value={post.restaurant} onChange={this.handleChange}/>
               <br />
-              <input type="number" name="zipcode" placeholder='New Zipcode Here' value ={post.zipcode} onChange={this.handleChange}/>
+              <input type="number" name="zipcode" placeholder='New Zipcode Here' value={post.zipcode} onChange={this.handleChange}/>
               <input type="text" name="body" placeholder='New Deets Here' value={post.body} onChange={this.handleChange}/>
-              <button className="upButton" type="submit">Update</button>
-            </form>}
+              <Button className="upButton" type="submit">Update</Button>
+            </Form>}
           </div>
         </div>
+
+        // <div className="row">
+        //   <div className="col-sm-10 col-md-8 mx-auto mt-5">
+        //     <br />
+        //
+        //     <h5>Restaurant: {post.restaurant}</h5>
+        //     <h5>Zipcode: {post.zipcode}</h5>
+        //     <h5>Deets: {post.body}</h5>
+        //   </div>
+        // </div>
+        //
+        // <h5>Created: {moment(post.createdAt).format('dddd, MMMM Do YYYY, h:mm:ss a')}</h5>
+        // <br />
+        // {post.owner === this.props.user._id && <Button variant='primary' onClick={this.deletePicture}>Delete Me</Button>}
+        // <br />
+        // <br />
+        // {post.owner === this.props.user._id && <form className="updateForm" onSubmit={this.updatePost}>
+        //   <input type="text" name="restaurant" placeholder='New Restaurant Here' value={post.restaurant} onChange={this.handleChange}/>
+        //   <br />
+        //   <input type="number" name="zipcode" placeholder='New Zipcode Here' value ={post.zipcode} onChange={this.handleChange}/>
+        //   <input type="text" name="body" placeholder='New Deets Here' value={post.body} onChange={this.handleChange}/>
+        //   <button className="upButton" type="submit">Update</button>
+        // </form>}
       )
     }
 
