@@ -14,6 +14,7 @@ import PostIndex from './routes/PostIndex'
 import PostShow from './routes/PostShow'
 import UserPost from './components/Home/UserPost'
 import Gallery from './components/Home/Gallery'
+// import SearchBox from './components/Search/Search'
 class App extends Component {
   constructor (props) {
     super(props)
@@ -89,6 +90,7 @@ class App extends Component {
         </main>
       </Fragment>
     )
+    // <SearchBox placeholder="Enter Zipcode" handleChange={(e) => console.log(e.target.value)}/>
   }
 }
 

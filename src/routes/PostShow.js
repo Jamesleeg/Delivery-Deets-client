@@ -124,10 +124,10 @@ class PostShow extends Component {
           <div className="col-sm-10 col-md-8 mx-auto mt-5">
             <br />
 
-            <h5>Restaurant: {post.restaurant}</h5>
+            <h3>Restaurant: {post.restaurant}</h3>
             <h5>Zipcode: {post.zipcode}</h5>
-            <h5>Deets: {post.body}</h5>
             <h5>Created: {moment(post.createdAt).format('dddd, MMMM Do YYYY, h:mm:ss a')}</h5>
+            <h3>Deets: {post.body}</h3>
             <br />
             {post.owner === this.props.user._id && <Button variant='primary' onClick={this.deletePost}>Delete Me</Button>}
             <br />

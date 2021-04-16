@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'
+import SearchBox from '../components/Search/Search'
 // import Form from 'react-bootstrap/Form'
 
 // import { withRouter } from 'react-router-dom'
@@ -14,10 +15,38 @@ class PostIndex extends Component {
     super(props)
 
     this.state = {
-      post: null,
+      posts: [],
       deleted: false,
-      updated: false
+      updated: false,
+      zipcode: [],
+      searchField: '',
+      searchPosts: []
+
     }
+  }
+
+  handleSubmit = () => {
+    event.preventDefault()
+    // need to look at all the post and filter by the searchField and return the post
+    // that match and then setState with those post.
+    console.log('this is post\n', this.state.post)
+    console.log('this is type of post\n', typeof this.state.post)
+    console.log('this is searchField\n', this.state.searchField)
+    console.log('this is type of searchField\n', typeof this.state.searchField)
+    const searchZip = parseInt(this.state.searchField)
+    console.log('this is searchZip\n', searchZip)
+    console.log('this is type of searchZip\n', typeof searchZip)
+    // const newPosts = []
+    // this.state.posts.forEach(post => {
+    //   if (post.zipcode === searchZip) {
+    //     newPosts.push(post)
+    //   }
+    // })
+    const newPosts = this.state.posts.filter(post => post.zipcode === searchZip)
+    console.log('these are the newhPosts on handleSubmit on postIndex\n', newPosts)
+    this.setState(searchPosts => {
+      return { searchPosts: newPosts }
+    })
   }
 
   handleChange = event => {
@@ -36,6 +65,10 @@ class PostIndex extends Component {
 
     // fetch all of our posts
     postIndex(user)
+      .then(res => {
+        console.log('this is res.data: ', res.data)
+        return res
+      })
       .then(res => {
         return res
       })
@@ -96,7 +129,11 @@ class PostIndex extends Component {
   }
 
   render () {
+    // const { stats, searchField } = this.state
     const { posts } = this.state
+    // const filterdZip = stats.filter(zipcode => (
+    //   // zipcode.includes(searchField)
+    // ))
     //  if we dont have any movies yet show that we are loading them
     if (!posts) {
       return (
@@ -105,9 +142,10 @@ class PostIndex extends Component {
     }
 
     const postsJSX = posts.map(post => {
+      // if there are no searchPost  use the post for jsx if there is a search post use search post for jsx
       if (post !== 'private') {
         return (
-          <div>
+          <div key={post._id}>
             <h5>Restaurant: {post.restaurant}</h5>
             <h5>Zipcode: {post.zipcode}</h5>
             <h5>Created: {moment(post.createdAt).format('dddd, MMMM Do YYYY, h:mm:ss a')}</h5>
@@ -152,6 +190,8 @@ class PostIndex extends Component {
       <div className="row">
         <div className="col-sm-10 col-md-8 mx-auto mt-5">
           <h3>Deets!</h3>
+          <SearchBox placeholder="Enter Zipcode" handleSubmit={this.handleSubmit} handleChange={(e) => this.setState({ searchField: e.target.value })}/>
+
           <ul key={'post._id'}>
             {postsJSX}
           </ul>
