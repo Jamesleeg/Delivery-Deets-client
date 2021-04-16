@@ -1,6 +1,6 @@
 {
-  "name": "DeliveryDeets",
-  "homepage": "https://<USERNAME>.github.io/<REPO NAME>",
+  "name": "Delivery-Deets-client",
+  "homepage": "https://jamesleeg.github.io/Delivery-Deets-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
