@@ -37,14 +37,15 @@ Bootstrap
 | Verb   | URI   |Body    |Headers  |  Status | Body |
 |--------|--------------|------  |-----  |-------------------|------------|
 | POST   | `/post`   |{} | token | 201, Created| Post Obj
-| GET   | `/post`   |n/a | empty | 200 Ok | Dog Obj
+| GET   | `/post`   |n/a | empty | 200 Ok | Post Obj
 | DELETE | `/post/:id` |n/a |token | 200 Ok | n/a
 | PATCH | `/post/:id` |Post data | token | 200, Ok | Post Obj
 
 ### Unsolved Problems
 
 #### Wireframe
-<img width="578" alt="Screen Shot 2021-04-14 at 12 39 19 PM" src="https://drive.google.com/file/d/1SqtiAzqtqORd53s2qwqd_1sUJxj8XbgL/view?usp=sharing">
+<img width="578" alt="Screen Shot 2021-04-14 at 12 39 19 PM" src="https://media.git.generalassemb.ly/user/33726/files/d1639c80-9c38-11eb-967b-e5aed2b73bce">
+<img width="578" alt="Screen Shot 2021-04-14 at 12 39 19 PM" src="https://media.git.generalassemb.ly/user/33726/files/c7419e00-9c38-11eb-8e60-2f9040e6b4eb">
 
 
 #### ERD
