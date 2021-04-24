@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'
-import SearchBox from '../components/Search/Search'
+// import SearchBox from '../components/Search/Search'
 // import Form from 'react-bootstrap/Form'
 
 // import { withRouter } from 'react-router-dom'
@@ -29,13 +29,7 @@ class PostIndex extends Component {
     event.preventDefault()
     // need to look at all the post and filter by the searchField and return the post
     // that match and then setState with those post.
-    console.log('this is post\n', this.state.post)
-    console.log('this is type of post\n', typeof this.state.post)
-    console.log('this is searchField\n', this.state.searchField)
-    console.log('this is type of searchField\n', typeof this.state.searchField)
     const searchZip = parseInt(this.state.searchField)
-    console.log('this is searchZip\n', searchZip)
-    console.log('this is type of searchZip\n', typeof searchZip)
     // const newPosts = []
     // this.state.posts.forEach(post => {
     //   if (post.zipcode === searchZip) {
@@ -43,7 +37,6 @@ class PostIndex extends Component {
     //   }
     // })
     const newPosts = this.state.posts.filter(post => post.zipcode === searchZip)
-    console.log('these are the newhPosts on handleSubmit on postIndex\n', newPosts)
     this.setState(searchPosts => {
       return { searchPosts: newPosts }
     })
@@ -66,10 +59,6 @@ class PostIndex extends Component {
     // fetch all of our posts
     postIndex(user)
       .then(res => {
-        console.log('this is res.data: ', res.data)
-        return res
-      })
-      .then(res => {
         return res
       })
       .then(res => this.setState({ posts: res.data }))
@@ -90,7 +79,6 @@ class PostIndex extends Component {
     // axios.delete(apiUrl + '/books/' + this.props.match.params.id)
     const { msgAlert, user } = this.props
 
-    console.log(this.props)
     postDelete(user, this.props.match.params.id)
     //  set the createdPostId to the _id of the movie we got in the response data
       .then(res => this.setState({ deleted: true }))
@@ -130,12 +118,13 @@ class PostIndex extends Component {
 
   render () {
     // const { stats, searchField } = this.state
-    const { posts } = this.state
+    const { posts, searchPost, searchField } = this.state
     // const filterdZip = stats.filter(zipcode => (
     //   // zipcode.includes(searchField)
     // ))
-    //  if we dont have any movies yet show that we are loading them
-    if (!posts) {
+    if (searchField === searchPost) {
+      return searchPost
+    } else if (!posts) {
       return (
         <Spinner animation="grow" varient='primary'/>
       )
@@ -186,11 +175,11 @@ class PostIndex extends Component {
     //   flexFlow: 'row wrap',
     //   border: 'solid'
     // }
+    // <SearchBox placeholder="Enter Zipcode" handleSubmit={this.handleSubmit} handleChange={(e) => this.setState({ searchField: e.target.value })}/>
     return (
       <div className="row">
         <div className="col-sm-10 col-md-8 mx-auto mt-5">
           <h3>Deets!</h3>
-          <SearchBox placeholder="Enter Zipcode" handleSubmit={this.handleSubmit} handleChange={(e) => this.setState({ searchField: e.target.value })}/>
 
           <ul key={'post._id'}>
             {postsJSX}

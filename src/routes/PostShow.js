@@ -56,7 +56,6 @@ class PostShow extends Component {
     // axios.delete(apiUrl + '/books/' + this.props.match.params.id)
     const { msgAlert, user, match } = this.props
 
-    console.log(this.props)
     postDelete(user, match.params.id)
     //  set the createdPostId to the _id of the movie we got in the response data
       .then(res => this.setState({ deleted: true }))

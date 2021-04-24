@@ -35,7 +35,7 @@ class PostCreate extends Component {
 
     postCreate(post, user)
       .then(res => this.setState({ createdPostId: res.data._id }))
-      // .then(res => console.log('this is res.data.post._id', res))
+    
       .then(() => msgAlert({
         heading: 'Created Post Successfully',
         message: 'Showing Created Post.',
