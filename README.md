@@ -45,6 +45,7 @@ As a signed in user, I would like to see update and delete "deets" that I post
 | PATCH | `/post/:id` |Post data | token | 200, Ok | Post Obj
 
 ### Unsolved Problems
+In the near future I will use a maps api to be able to locate your zipcode with out having to hard type it.
 
 #### Wireframe
 <img width="578" alt="Screen Shot 2021-04-14 at 12 39 19 PM" src="https://media.git.generalassemb.ly/user/33726/files/d1639c80-9c38-11eb-967b-e5aed2b73bce">
