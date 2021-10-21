@@ -26,7 +26,7 @@ export const postIndex = user => {
 
 export const galleryNoUser = () => {
   return axios({
-    url: apiUrl + '/board',
+    url: apiUrl + '/post/',
     method: 'GET'
     // include an authorization header, that includes our user's token
     // so the API knows who to sign out
@@ -65,10 +65,10 @@ export const postUpdate = (id, post, user) => {
 
 export const userPostShow = (user) => {
   return axios({
-    url: apiUrl + '/home',
-    method: 'Get',
-    headers: {
-      'Authorization': `Bearer ${user.token}`
-    }
+    url: apiUrl + '/',
+    method: 'Get'
+    // headers: {
+    //   'Authorization': `Bearer ${user.token}`
+    // }
   })
 }

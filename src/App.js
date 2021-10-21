@@ -13,7 +13,8 @@ import PostCreate from './routes/PostCreate'
 import PostIndex from './routes/PostIndex'
 import PostShow from './routes/PostShow'
 import UserPost from './components/Home/UserPost'
-import Gallery from './components/Home/Gallery'
+import UserPostShow from './routes/userPostShow'
+// import Gallery from './components/Home/Gallery'
 // import SearchBox from './components/Search/Search'
 class App extends Component {
   constructor (props) {
@@ -64,8 +65,8 @@ class App extends Component {
           <Route path='/sign-in' render={() => (
             <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
-          <Route path='/gallery' render={() => (
-            <Gallery msgAlert={this.msgAlert} />
+          <Route path='/' render={() => (
+            <UserPostShow msgAlert={this.msgAlert} />
           )} />
 
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
